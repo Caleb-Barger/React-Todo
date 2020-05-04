@@ -1,6 +1,8 @@
 import React from 'react';
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
+import { Badge } from 'reactstrap'
+import './App.css'
 
 const tasks =  []
 
@@ -11,14 +13,16 @@ class App extends React.Component {
   }
 
   addItem = taskName => {
-    const newItem = {
-      name: taskName, 
-      id: Date.now(),
-      completed: false,
+    if (taskName !== "") {
+      const newItem = {
+        name: taskName, 
+        id: Date.now(),
+        completed: false,
+      }
+      this.setState({
+        tasks: [...this.state.tasks, newItem]
+      }, () => console.log(this.state))
     }
-    this.setState({
-      tasks: [...this.state.tasks, newItem]
-    }, () => console.log(this.state))
   }
 
   toggleItem = (taskId) => {
@@ -34,18 +38,22 @@ class App extends React.Component {
     const uncompletedTasks = this.state.tasks.filter(tasks => {
       return tasks.completed === false
     })
-    
+
     this.setState({tasks: uncompletedTasks})
   }
 
   render() {
     return (
-      <div>
-        <TodoForm addItem={this.addItem}/>
+      <div className="container">
+        <h1><Badge>The Very Clean Todo-List App</Badge></h1>
+        <TodoForm 
+          addItem={this.addItem}
+          clearCompletedItems={this.clearCompletedItems}
+        />
         <TodoList 
           tasks={this.state.tasks} 
           toggleItem={this.toggleItem} 
-          clearCompletedItems={this.clearCompletedItems}/>
+        />
       </div>
     );
   }

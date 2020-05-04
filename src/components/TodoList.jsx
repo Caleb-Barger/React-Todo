@@ -1,21 +1,19 @@
 import React from 'react'
 import Todo from './Todo'
+import { ListGroup } from 'reactstrap'
 
 const TodoList = props => {
-    const {tasks, toggleItem, clearCompletedItems} = props
-
-    const clickHandler = evt => {
-        clearCompletedItems()
-    }
+    const { tasks, toggleItem } = props
 
     return (
         <div>
-            {tasks.map(item => {
-                return(
-                    <Todo task={item} toggleItem={toggleItem} key={item.id}/>
-                )
-            })}
-            <button onClick={clickHandler}>Clear Completed</button>
+            <ListGroup>
+                {tasks.map(item => {
+                    return(
+                        <Todo task={item} toggleItem={toggleItem} key={item.id}/>
+                    )
+                })}
+            </ListGroup>
         </div>
     )
 }

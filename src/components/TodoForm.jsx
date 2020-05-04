@@ -1,13 +1,23 @@
 import React from 'react'
+import { 
+    InputGroup, 
+    Input, 
+    InputGroupButtonDropdown, 
+    DropdownToggle,
+    DropdownMenu, 
+    DropdownItem
+} from 'reactstrap'
 
 class TodoForm extends React.Component{
-
     constructor(){
         super()
         this.state = {
             currentValue: "",
+            dropdownOpen: false
         }
     }
+
+    toggleDropdown = () => {this.setState({dropdownOpen: !this.state.dropdownOpen})}
 
     changeHandler = evt => {
         this.setState({currentValue: evt.target.value})
@@ -19,17 +29,30 @@ class TodoForm extends React.Component{
         this.setState({currentValue: ""})
     }
 
+
     render(){
         return(
-            <form onSubmit={this.onSubmitHandler}>
-                <input 
+            // <form onSubmit={this.onSubmitHandler}>
+                <InputGroup>
+                <Input 
                     type='text'
                     name='itemForm'
                     value={this.state.currentValue}
                     onChange={this.changeHandler}
                 />
-                <button>Add Todo</button>
-            </form>
+                <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                    <DropdownToggle outline caret>
+                            actions
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem onClick={this.onSubmitHandler}>add todo</DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem onClick={() => this.props.clearCompletedItems()}>clear completed</DropdownItem>
+                    </DropdownMenu>
+                </InputGroupButtonDropdown>
+                {/* <button>Add Todo</button> */}
+                </InputGroup>
+            // </form>
         )
     }
 }

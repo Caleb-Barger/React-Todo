@@ -6,6 +6,7 @@ import './App.css'
 
 const tasks =  []
 
+
 class App extends React.Component {
   constructor(){
     super()
@@ -45,7 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1><Badge>The Very Clean Todo-List App</Badge></h1>
+        <h1><Badge>Todo-List App</Badge></h1>
         <TodoForm 
           addItem={this.addItem}
           clearCompletedItems={this.clearCompletedItems}

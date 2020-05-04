@@ -5,8 +5,10 @@ import {
     InputGroupButtonDropdown, 
     DropdownToggle,
     DropdownMenu, 
-    DropdownItem
+    DropdownItem,
+    Form,
 } from 'reactstrap'
+import './TodoForm.css'
 
 class TodoForm extends React.Component{
     constructor(){
@@ -32,27 +34,27 @@ class TodoForm extends React.Component{
 
     render(){
         return(
-            // <form onSubmit={this.onSubmitHandler}>
+            <Form className="form" onSubmit={this.onSubmitHandler}>
                 <InputGroup>
-                <Input 
-                    type='text'
-                    name='itemForm'
-                    value={this.state.currentValue}
-                    onChange={this.changeHandler}
-                />
-                <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-                    <DropdownToggle outline caret>
-                            actions
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={this.onSubmitHandler}>add todo</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem onClick={() => this.props.clearCompletedItems()}>clear completed</DropdownItem>
-                    </DropdownMenu>
-                </InputGroupButtonDropdown>
-                {/* <button>Add Todo</button> */}
+                    <Input 
+                        type='text'
+                        name='itemForm'
+                        value={this.state.currentValue}
+                        onChange={this.changeHandler}
+                    />
+                    <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                        <DropdownToggle outline caret>
+                                actions
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={this.onSubmitHandler}>add todo</DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem onClick={() => this.props.clearCompletedItems()}>clear completed</DropdownItem>
+                        </DropdownMenu>
+                    </InputGroupButtonDropdown>
+                    
                 </InputGroup>
-            // </form>
+            </Form>
         )
     }
 }
